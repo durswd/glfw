@@ -160,7 +160,8 @@ static int translateKey(unsigned int key)
 
 - (void)windowDidResize:(NSNotification *)notification
 {
-    [window->nsgl.context update];
+    if (window->context)
+        [window->context->nsgl.object update];
 
     if (_glfw.cursorWindow == window &&
         window->cursorMode == GLFW_CURSOR_DISABLED)
@@ -177,7 +178,8 @@ static int translateKey(unsigned int key)
 
 - (void)windowDidMove:(NSNotification *)notification
 {
-    [window->nsgl.context update];
+    if (window->context)
+        [window->context->nsgl.object update];
 
     if (_glfw.cursorWindow == window &&
         window->cursorMode == GLFW_CURSOR_DISABLED)
@@ -887,7 +889,7 @@ int _glfwPlatformCreateWindow(_GLFWwindow* window,
     if (!createWindow(window, wndconfig))
         return GLFW_FALSE;
 
-    if (ctxconfig->api != GLFW_NO_API)
+    if (window->context)
     {
         if (!_glfwCreateContext(window, ctxconfig, fbconfig))
             return GLFW_FALSE;
@@ -910,7 +912,7 @@ void _glfwPlatformDestroyWindow(_GLFWwindow* window)
     if (window->monitor)
         leaveFullscreenMode(window);
 
-    if (window->context.api != GLFW_NO_API)
+    if (window->context)
         _glfwDestroyContext(window);
 
     [window->ns.object setDelegate:nil];

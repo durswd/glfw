@@ -1475,7 +1475,7 @@ int _glfwPlatformCreateWindow(_GLFWwindow* window,
     if (!createWindow(window, wndconfig, visual, depth))
         return GLFW_FALSE;
 
-    if (ctxconfig->api != GLFW_NO_API)
+    if (window->context)
     {
         if (!_glfwCreateContext(window, ctxconfig, fbconfig))
             return GLFW_FALSE;
@@ -1501,7 +1501,7 @@ void _glfwPlatformDestroyWindow(_GLFWwindow* window)
         window->x11.ic = NULL;
     }
 
-    if (window->context.api != GLFW_NO_API)
+    if (window->context)
         _glfwDestroyContext(window);
 
     if (window->x11.handle)
