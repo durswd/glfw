@@ -177,7 +177,7 @@ static GLFWbool chooseFBConfigs(const _GLFWctxconfig* ctxconfig,
 
 // Initialize EGL
 //
-int _glfwInitContextAPI(void)
+GLFWbool _glfwInitContextAPI(void)
 {
     int i;
     const char* sonames[] =
@@ -293,9 +293,9 @@ void _glfwTerminateContextAPI(void)
 
 // Create the OpenGL or OpenGL ES context
 //
-int _glfwCreateContext(_GLFWwindow* window,
-                       const _GLFWctxconfig* ctxconfig,
-                       const _GLFWfbconfig* fbconfig)
+GLFWbool _glfwCreateContext(_GLFWwindow* window,
+                            const _GLFWctxconfig* ctxconfig,
+                            const _GLFWfbconfig* fbconfig)
 {
     int attribs[40];
     EGLConfig config;
@@ -609,7 +609,7 @@ void _glfwPlatformSwapInterval(int interval)
     _glfw_eglSwapInterval(_glfw.egl.display, interval);
 }
 
-int _glfwPlatformExtensionSupported(const char* extension)
+GLFWbool _glfwPlatformExtensionSupported(const char* extension)
 {
     const char* extensions = _glfw_eglQueryString(_glfw.egl.display,
                                                   EGL_EXTENSIONS);

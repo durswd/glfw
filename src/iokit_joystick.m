@@ -464,7 +464,7 @@ void _glfwTerminateJoysticks(void)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformJoystickPresent(int joy)
+GLFWbool _glfwPlatformJoystickPresent(int joy)
 {
     pollJoystickEvents();
 

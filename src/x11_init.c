@@ -710,7 +710,7 @@ Cursor _glfwCreateCursor(const GLFWimage* image, int xhot, int yhot)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformInit(void)
+GLFWbool _glfwPlatformInit(void)
 {
 #if !defined(X_HAVE_UTF8_STRING)
     // HACK: If the current locale is C, apply the environment's locale

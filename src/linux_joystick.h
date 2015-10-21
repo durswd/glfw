@@ -39,7 +39,7 @@ typedef struct _GLFWjoystickLinux
 {
     struct
     {
-        int             present;
+        GLFWbool        present;
         int             fd;
         float*          axes;
         int             axisCount;
@@ -57,7 +57,7 @@ typedef struct _GLFWjoystickLinux
 } _GLFWjoystickLinux;
 
 
-int _glfwInitJoysticks(void);
+GLFWbool _glfwInitJoysticks(void);
 void _glfwTerminateJoysticks(void);
 
 #endif // _glfw3_linux_joystick_h_

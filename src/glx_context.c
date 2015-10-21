@@ -150,7 +150,7 @@ static GLXContext createLegacyContext(_GLFWwindow* window,
 
 // Initialize GLX
 //
-int _glfwInitContextAPI(void)
+GLFWbool _glfwInitContextAPI(void)
 {
 #if defined(__CYGWIN__)
     const char* soname = "libGL-1.so";
@@ -308,9 +308,9 @@ void _glfwTerminateContextAPI(void)
 
 // Create the OpenGL or OpenGL ES context
 //
-int _glfwCreateContext(_GLFWwindow* window,
-                       const _GLFWctxconfig* ctxconfig,
-                       const _GLFWfbconfig* fbconfig)
+GLFWbool _glfwCreateContext(_GLFWwindow* window,
+                            const _GLFWctxconfig* ctxconfig,
+                            const _GLFWfbconfig* fbconfig)
 {
     int attribs[40];
     GLXFBConfig native = NULL;
@@ -574,7 +574,7 @@ void _glfwPlatformSwapInterval(int interval)
     }
 }
 
-int _glfwPlatformExtensionSupported(const char* extension)
+GLFWbool _glfwPlatformExtensionSupported(const char* extension)
 {
     const char* extensions =
         _glfw_glXQueryExtensionsString(_glfw.x11.display, _glfw.x11.screen);

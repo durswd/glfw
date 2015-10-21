@@ -187,7 +187,7 @@ static void pollJoystickEvents(void)
 
 // Initialize joystick interface
 //
-int _glfwInitJoysticks(void)
+GLFWbool _glfwInitJoysticks(void)
 {
 #if defined(__linux__)
     const char* dirname = "/dev/input";
@@ -292,7 +292,7 @@ void _glfwTerminateJoysticks(void)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformJoystickPresent(int joy)
+GLFWbool _glfwPlatformJoystickPresent(int joy)
 {
     pollJoystickEvents();
 

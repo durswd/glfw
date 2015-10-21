@@ -233,10 +233,10 @@ static char *translateCursorShape(int shape)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformCreateWindow(_GLFWwindow* window,
-                              const _GLFWwndconfig* wndconfig,
-                              const _GLFWctxconfig* ctxconfig,
-                              const _GLFWfbconfig* fbconfig)
+GLFWbool _glfwPlatformCreateWindow(_GLFWwindow* window,
+                                   const _GLFWwndconfig* wndconfig,
+                                   const _GLFWctxconfig* ctxconfig,
+                                   const _GLFWfbconfig* fbconfig)
 {
     if (window->context)
     {
@@ -384,19 +384,19 @@ void _glfwPlatformHideWindow(_GLFWwindow* window)
     wl_surface_commit(window->wl.surface);
 }
 
-int _glfwPlatformWindowFocused(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowFocused(_GLFWwindow* window)
 {
     // TODO
     return GLFW_FALSE;
 }
 
-int _glfwPlatformWindowIconified(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowIconified(_GLFWwindow* window)
 {
     // TODO
     return GLFW_FALSE;
 }
 
-int _glfwPlatformWindowVisible(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowVisible(_GLFWwindow* window)
 {
     // TODO
     return GLFW_FALSE;
@@ -437,9 +437,9 @@ void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode)
     _glfwPlatformSetCursor(window, window->wl.currentCursor);
 }
 
-int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
-                              const GLFWimage* image,
-                              int xhot, int yhot)
+GLFWbool _glfwPlatformCreateCursor(_GLFWcursor* cursor,
+                                   const GLFWimage* image,
+                                   int xhot, int yhot)
 {
     struct wl_shm_pool* pool;
     int stride = image->width * 4;

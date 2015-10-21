@@ -34,7 +34,7 @@
 //////                       GLFW internal API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformInit(void)
+GLFWbool _glfwPlatformInit(void)
 {
     int error;
 

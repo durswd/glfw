@@ -224,10 +224,10 @@ struct _GLFWfbconfig
     int         accumBlueBits;
     int         accumAlphaBits;
     int         auxBuffers;
-    int         stereo;
+    GLFWbool    stereo;
     int         samples;
-    int         sRGB;
-    int         doublebuffer;
+    GLFWbool    sRGB;
+    GLFWbool    doublebuffer;
 
     // This is defined in the context API's context.h
     _GLFW_PLATFORM_FBCONFIG;
@@ -396,7 +396,7 @@ extern _GLFWlibrary _glfw;
  *  @return `GLFW_TRUE` if successful, or `GLFW_FALSE` if an error occurred.
  *  @ingroup platform
  */
-int _glfwPlatformInit(void);
+GLFWbool _glfwPlatformInit(void);
 
 /*! @brief Terminates the platform-specific part of the library.
  *  @ingroup platform
@@ -483,7 +483,7 @@ const char* _glfwPlatformGetClipboardString(_GLFWwindow* window);
 /*! @copydoc glfwJoystickPresent
  *  @ingroup platform
  */
-int _glfwPlatformJoystickPresent(int joy);
+GLFWbool _glfwPlatformJoystickPresent(int joy);
 
 /*! @copydoc glfwGetJoystickAxes
  *  @ingroup platform
@@ -512,10 +512,10 @@ void _glfwPlatformSetTime(double time);
 
 /*! @ingroup platform
  */
-int _glfwPlatformCreateWindow(_GLFWwindow* window,
-                              const _GLFWwndconfig* wndconfig,
-                              const _GLFWctxconfig* ctxconfig,
-                              const _GLFWfbconfig* fbconfig);
+GLFWbool _glfwPlatformCreateWindow(_GLFWwindow* window,
+                                   const _GLFWwndconfig* wndconfig,
+                                   const _GLFWctxconfig* ctxconfig,
+                                   const _GLFWfbconfig* fbconfig);
 
 /*! @ingroup platform
  */
@@ -593,17 +593,17 @@ void _glfwPlatformHideWindow(_GLFWwindow* window);
 /*! @brief Returns whether the window is focused.
  *  @ingroup platform
  */
-int _glfwPlatformWindowFocused(_GLFWwindow* window);
+GLFWbool _glfwPlatformWindowFocused(_GLFWwindow* window);
 
 /*! @brief Returns whether the window is iconified.
  *  @ingroup platform
  */
-int _glfwPlatformWindowIconified(_GLFWwindow* window);
+GLFWbool _glfwPlatformWindowIconified(_GLFWwindow* window);
 
 /*! @brief Returns whether the window is visible.
  *  @ingroup platform
  */
-int _glfwPlatformWindowVisible(_GLFWwindow* window);
+GLFWbool _glfwPlatformWindowVisible(_GLFWwindow* window);
 
 /*! @copydoc glfwPollEvents
  *  @ingroup platform
@@ -643,7 +643,7 @@ void _glfwPlatformSwapInterval(int interval);
 /*! @copydoc glfwExtensionSupported
  *  @ingroup platform
  */
-int _glfwPlatformExtensionSupported(const char* extension);
+GLFWbool _glfwPlatformExtensionSupported(const char* extension);
 
 /*! @copydoc glfwGetProcAddress
  *  @ingroup platform
@@ -653,12 +653,12 @@ GLFWglproc _glfwPlatformGetProcAddress(const char* procname);
 /*! @copydoc glfwCreateCursor
  *  @ingroup platform
  */
-int _glfwPlatformCreateCursor(_GLFWcursor* cursor, const GLFWimage* image, int xhot, int yhot);
+GLFWbool _glfwPlatformCreateCursor(_GLFWcursor* cursor, const GLFWimage* image, int xhot, int yhot);
 
 /*! @copydoc glfwCreateStandardCursor
  *  @ingroup platform
  */
-int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape);
+GLFWbool _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape);
 
 /*! @copydoc glfwDestroyCursor
  *  @ingroup platform
@@ -713,7 +713,7 @@ void _glfwInputFramebufferSize(_GLFWwindow* window, int width, int height);
  *  `GLFW_FALSE` if it was restored.
  *  @ingroup event
  */
-void _glfwInputWindowIconify(_GLFWwindow* window, int iconified);
+void _glfwInputWindowIconify(_GLFWwindow* window, GLFWbool iconified);
 
 /*! @brief Notifies shared code of a window damage event.
  *  @param[in] window The window that received the event.
@@ -744,7 +744,7 @@ void _glfwInputKey(_GLFWwindow* window, int key, int scancode, int action, int m
  *  `GLFW_FALSE` otherwise.
  *  @ingroup event
  */
-void _glfwInputChar(_GLFWwindow* window, unsigned int codepoint, int mods, int plain);
+void _glfwInputChar(_GLFWwindow* window, unsigned int codepoint, int mods, GLFWbool plain);
 
 /*! @brief Notifies shared code of a scroll event.
  *  @param[in] window The window that received the event.
@@ -830,7 +830,7 @@ void _glfwSplitBPP(int bpp, int* red, int* green, int* blue);
  *  @return `GLFW_TRUE` if the extension was found, or `GLFW_FALSE` otherwise.
  *  @ingroup utility
  */
-int _glfwStringInExtensionString(const char* string, const char* extensions);
+GLFWbool _glfwStringInExtensionString(const char* string, const char* extensions);
 
 /*! @brief Chooses the framebuffer config that best matches the desired one.
  *  @param[in] desired The desired framebuffer config.

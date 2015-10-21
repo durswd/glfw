@@ -457,10 +457,10 @@ void _glfwDeleteEventQueue(EventQueue* queue)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformCreateWindow(_GLFWwindow* window,
-                              const _GLFWwndconfig* wndconfig,
-                              const _GLFWctxconfig* ctxconfig,
-                              const _GLFWfbconfig* fbconfig)
+GLFWbool _glfwPlatformCreateWindow(_GLFWwindow* window,
+                                   const _GLFWwndconfig* wndconfig,
+                                   const _GLFWctxconfig* ctxconfig,
+                                   const _GLFWfbconfig* fbconfig)
 {
     if (window->context)
     {
@@ -613,21 +613,21 @@ void _glfwPlatformUnhideWindow(_GLFWwindow* window)
                     "Mir: Unsupported function %s", __PRETTY_FUNCTION__);
 }
 
-int _glfwPlatformWindowFocused(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowFocused(_GLFWwindow* window)
 {
     _glfwInputError(GLFW_PLATFORM_ERROR,
                     "Mir: Unsupported function %s", __PRETTY_FUNCTION__);
     return GLFW_FALSE;
 }
 
-int _glfwPlatformWindowIconified(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowIconified(_GLFWwindow* window)
 {
     _glfwInputError(GLFW_PLATFORM_ERROR,
                     "Mir: Unsupported function %s", __PRETTY_FUNCTION__);
     return GLFW_FALSE;
 }
 
-int _glfwPlatformWindowVisible(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowVisible(_GLFWwindow* window)
 {
     return mir_surface_get_visibility(window->mir.surface) == mir_surface_visibility_exposed;
 }
@@ -668,9 +668,9 @@ void _glfwPlatformGetFramebufferSize(_GLFWwindow* window, int* width, int* heigh
 }
 
 // FIXME implement
-int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
-                              const GLFWimage* image,
-                              int xhot, int yhot)
+GLFWbool _glfwPlatformCreateCursor(_GLFWcursor* cursor,
+                                   const GLFWimage* image,
+                                   int xhot, int yhot)
 {
     MirBufferStream* stream;
     MirPixelFormat pixel_format = findValidPixelFormat();
@@ -741,7 +741,7 @@ const char* getSystemCursorName(int shape)
     return NULL;
 }
 
-int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
+GLFWbool _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
 {
     const char* cursor_name = getSystemCursorName(shape);
 

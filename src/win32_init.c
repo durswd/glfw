@@ -251,15 +251,15 @@ static void createKeyTables(void)
 
 // Returns whether desktop compositing is enabled
 //
-BOOL _glfwIsCompositionEnabled(void)
+GLFWbool _glfwIsCompositionEnabled(void)
 {
     BOOL enabled;
 
     if (!_glfw_DwmIsCompositionEnabled)
-        return FALSE;
+        return GLFW_FALSE;
 
     if (_glfw_DwmIsCompositionEnabled(&enabled) != S_OK)
-        return FALSE;
+        return GLFW_FALSE;
 
     return enabled;
 }
@@ -313,7 +313,7 @@ char* _glfwCreateUTF8FromWideString(const WCHAR* source)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformInit(void)
+GLFWbool _glfwPlatformInit(void)
 {
     // To make SetForegroundWindow work as we want, we need to fiddle
     // with the FOREGROUNDLOCKTIMEOUT system setting (we do this as early

@@ -270,7 +270,7 @@ static GLFWbool choosePixelFormat(_GLFWcontext* context,
 
 // Initialize WGL
 //
-int _glfwInitContextAPI(void)
+GLFWbool _glfwInitContextAPI(void)
 {
     if (!_glfwCreateContextTLS())
         return GLFW_FALSE;
@@ -326,9 +326,9 @@ void _glfwTerminateContextAPI(void)
 
 // Create the OpenGL or OpenGL ES context
 //
-int _glfwCreateContext(_GLFWwindow* window,
-                       const _GLFWctxconfig* ctxconfig,
-                       const _GLFWfbconfig* fbconfig)
+GLFWbool _glfwCreateContext(_GLFWwindow* window,
+                            const _GLFWctxconfig* ctxconfig,
+                            const _GLFWfbconfig* fbconfig)
 {
     int attribs[40];
     int pixelFormat = 0;
@@ -497,9 +497,9 @@ void _glfwDestroyContext(_GLFWwindow* window)
 
 // Analyzes the specified context for possible recreation
 //
-int _glfwAnalyzeContext(const _GLFWcontext* context,
-                        const _GLFWctxconfig* ctxconfig,
-                        const _GLFWfbconfig* fbconfig)
+GLFWbool _glfwAnalyzeContext(const _GLFWcontext* context,
+                             const _GLFWctxconfig* ctxconfig,
+                             const _GLFWfbconfig* fbconfig)
 {
     GLFWbool required = GLFW_FALSE;
 
@@ -634,7 +634,7 @@ void _glfwPlatformSwapInterval(int interval)
         context->wgl.SwapIntervalEXT(interval);
 }
 
-int _glfwPlatformExtensionSupported(const char* extension)
+GLFWbool _glfwPlatformExtensionSupported(const char* extension)
 {
     const char* extensions;
     _GLFWwindow* window = _glfwPlatformGetCurrentContext();

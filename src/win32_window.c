@@ -665,7 +665,8 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg,
 
 // Creates the GLFW window and rendering context
 //
-static int createWindow(_GLFWwindow* window, const _GLFWwndconfig* wndconfig)
+static GLFWbool createWindow(_GLFWwindow* window,
+                             const _GLFWwndconfig* wndconfig)
 {
     int xpos, ypos, fullWidth, fullHeight;
     WCHAR* wideTitle;
@@ -815,10 +816,10 @@ void _glfwUnregisterWindowClass(void)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformCreateWindow(_GLFWwindow* window,
-                              const _GLFWwndconfig* wndconfig,
-                              const _GLFWctxconfig* ctxconfig,
-                              const _GLFWfbconfig* fbconfig)
+GLFWbool _glfwPlatformCreateWindow(_GLFWwindow* window,
+                                   const _GLFWwndconfig* wndconfig,
+                                   const _GLFWctxconfig* ctxconfig,
+                                   const _GLFWfbconfig* fbconfig)
 {
     int status;
 
@@ -1050,17 +1051,17 @@ void _glfwPlatformHideWindow(_GLFWwindow* window)
     ShowWindow(window->win32.handle, SW_HIDE);
 }
 
-int _glfwPlatformWindowFocused(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowFocused(_GLFWwindow* window)
 {
     return window->win32.handle == GetActiveWindow();
 }
 
-int _glfwPlatformWindowIconified(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowIconified(_GLFWwindow* window)
 {
     return IsIconic(window->win32.handle);
 }
 
-int _glfwPlatformWindowVisible(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowVisible(_GLFWwindow* window)
 {
     return IsWindowVisible(window->win32.handle);
 }
@@ -1196,9 +1197,9 @@ void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode)
         SetCursor(NULL);
 }
 
-int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
-                              const GLFWimage* image,
-                              int xhot, int yhot)
+GLFWbool _glfwPlatformCreateCursor(_GLFWcursor* cursor,
+                                   const GLFWimage* image,
+                                   int xhot, int yhot)
 {
     HDC dc;
     HBITMAP bitmap, mask;
@@ -1261,7 +1262,7 @@ int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
     return GLFW_TRUE;
 }
 
-int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
+GLFWbool _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
 {
     cursor->win32.handle =
         CopyCursor(LoadCursorW(NULL, translateCursorShape(shape)));

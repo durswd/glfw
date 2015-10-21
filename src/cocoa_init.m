@@ -195,7 +195,7 @@ static void createKeyTables(void)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformInit(void)
+GLFWbool _glfwPlatformInit(void)
 {
     _glfw.ns.autoreleasePool = [[NSAutoreleasePool alloc] init];
 

@@ -33,7 +33,7 @@
 
 // Initialize OpenGL support
 //
-int _glfwInitContextAPI(void)
+GLFWbool _glfwInitContextAPI(void)
 {
     if (!_glfwCreateContextTLS())
         return GLFW_FALSE;
@@ -59,9 +59,9 @@ void _glfwTerminateContextAPI(void)
 
 // Create the OpenGL context
 //
-int _glfwCreateContext(_GLFWwindow* window,
-                       const _GLFWctxconfig* ctxconfig,
-                       const _GLFWfbconfig* fbconfig)
+GLFWbool _glfwCreateContext(_GLFWwindow* window,
+                            const _GLFWctxconfig* ctxconfig,
+                            const _GLFWfbconfig* fbconfig)
 {
     unsigned int attributeCount = 0;
     _GLFWcontext* context = window->context;
@@ -267,7 +267,7 @@ void _glfwPlatformSwapInterval(int interval)
     [context->nsgl.object setValues:&sync forParameter:NSOpenGLCPSwapInterval];
 }
 
-int _glfwPlatformExtensionSupported(const char* extension)
+GLFWbool _glfwPlatformExtensionSupported(const char* extension)
 {
     // There are no NSGL extensions
     return GLFW_FALSE;

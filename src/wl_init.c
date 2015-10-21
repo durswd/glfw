@@ -541,7 +541,7 @@ static const struct wl_registry_listener registryListener = {
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformInit(void)
+GLFWbool _glfwPlatformInit(void)
 {
     _glfw.wl.display = wl_display_connect(NULL);
     if (!_glfw.wl.display)

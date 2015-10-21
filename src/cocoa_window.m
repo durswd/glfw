@@ -484,7 +484,7 @@ static int translateKey(unsigned int key)
 
     NSString* characters = [event characters];
     NSUInteger i, length = [characters length];
-    const int plain = !(mods & GLFW_MOD_SUPER);
+    const GLFWbool plain = !(mods & GLFW_MOD_SUPER);
 
     for (i = 0;  i < length;  i++)
     {
@@ -878,10 +878,10 @@ static GLFWbool createWindow(_GLFWwindow* window,
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformCreateWindow(_GLFWwindow* window,
-                              const _GLFWwndconfig* wndconfig,
-                              const _GLFWctxconfig* ctxconfig,
-                              const _GLFWfbconfig* fbconfig)
+GLFWbool _glfwPlatformCreateWindow(_GLFWwindow* window,
+                                   const _GLFWwndconfig* wndconfig,
+                                   const _GLFWctxconfig* ctxconfig,
+                                   const _GLFWfbconfig* fbconfig)
 {
     if (!initializeAppKit())
         return GLFW_FALSE;
@@ -1052,17 +1052,17 @@ void _glfwPlatformHideWindow(_GLFWwindow* window)
     [window->ns.object orderOut:nil];
 }
 
-int _glfwPlatformWindowFocused(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowFocused(_GLFWwindow* window)
 {
     return [window->ns.object isKeyWindow];
 }
 
-int _glfwPlatformWindowIconified(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowIconified(_GLFWwindow* window)
 {
     return [window->ns.object isMiniaturized];
 }
 
-int _glfwPlatformWindowVisible(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowVisible(_GLFWwindow* window)
 {
     return [window->ns.object isVisible];
 }
@@ -1170,9 +1170,9 @@ void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode)
         CGAssociateMouseAndMouseCursorPosition(true);
 }
 
-int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
-                              const GLFWimage* image,
-                              int xhot, int yhot)
+GLFWbool _glfwPlatformCreateCursor(_GLFWcursor* cursor,
+                                   const GLFWimage* image,
+                                   int xhot, int yhot)
 {
     NSImage* native;
     NSBitmapImageRep* rep;
@@ -1213,7 +1213,7 @@ int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
     return GLFW_TRUE;
 }
 
-int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
+GLFWbool _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
 {
     if (!initializeAppKit())
         return GLFW_FALSE;

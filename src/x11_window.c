@@ -874,7 +874,7 @@ static void processEvent(XEvent *event)
         {
             const int key = translateKey(keycode);
             const int mods = translateState(event->xkey.state);
-            const int plain = !(mods & (GLFW_MOD_CONTROL | GLFW_MOD_ALT));
+            const GLFWbool plain = !(mods & (GLFW_MOD_CONTROL | GLFW_MOD_ALT));
 
             if (window->x11.ic)
             {
@@ -1817,7 +1817,7 @@ void _glfwPlatformHideWindow(_GLFWwindow* window)
     XFlush(_glfw.x11.display);
 }
 
-int _glfwPlatformWindowFocused(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowFocused(_GLFWwindow* window)
 {
     Window focused;
     int state;
@@ -1826,12 +1826,12 @@ int _glfwPlatformWindowFocused(_GLFWwindow* window)
     return window->x11.handle == focused;
 }
 
-int _glfwPlatformWindowIconified(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowIconified(_GLFWwindow* window)
 {
     return getWindowState(window) == IconicState;
 }
 
-int _glfwPlatformWindowVisible(_GLFWwindow* window)
+GLFWbool _glfwPlatformWindowVisible(_GLFWwindow* window)
 {
     XWindowAttributes wa;
     XGetWindowAttributes(_glfw.x11.display, window->x11.handle, &wa);
@@ -1938,9 +1938,9 @@ void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode)
     }
 }
 
-int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
-                              const GLFWimage* image,
-                              int xhot, int yhot)
+GLFWbool _glfwPlatformCreateCursor(_GLFWcursor* cursor,
+                                   const GLFWimage* image,
+                                   int xhot, int yhot)
 {
     cursor->x11.handle = _glfwCreateCursor(image, xhot, yhot);
     if (!cursor->x11.handle)
@@ -1949,7 +1949,7 @@ int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
     return GLFW_TRUE;
 }
 
-int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
+GLFWbool _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
 {
     cursor->x11.handle = XCreateFontCursor(_glfw.x11.display,
                                            translateCursorShape(shape));
