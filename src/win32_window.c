@@ -831,7 +831,8 @@ int _glfwPlatformCreateWindow(_GLFWwindow* window,
             return GLFW_FALSE;
 
 #if defined(_GLFW_WGL)
-        status = _glfwAnalyzeContext(window, ctxconfig, fbconfig);
+        _glfwPlatformMakeContextCurrent(window);
+        status = _glfwAnalyzeContext(ctxconfig, fbconfig);
 
         if (status == _GLFW_RECREATION_IMPOSSIBLE)
             return GLFW_FALSE;
